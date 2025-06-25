@@ -39,7 +39,7 @@ const Navigation = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Always visible */}
           <div className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -47,10 +47,10 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                     isActive(item.path)
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                      ? "bg-blue-600 text-white shadow-md"
+                      : "text-gray-700 bg-gray-50 hover:text-blue-600 hover:bg-blue-50 hover:shadow-sm"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -75,7 +75,7 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t shadow-lg">
               {navItems.map((item) => {
                 const Icon = item.icon;
                 return (

@@ -1,5 +1,4 @@
-
-import { BookOpen, Download, ExternalLink, Calendar, Clock, User, Search, Filter } from "lucide-react";
+import { BookOpen, Download, ExternalLink, Calendar, Clock, User, Search, Filter, Share2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,7 +24,8 @@ const Resources = () => {
       downloads: 156,
       size: "2.3 MB",
       pages: 24,
-      featured: true
+      featured: true,
+      downloadUrl: "#"
     },
     {
       id: 2,
@@ -37,7 +37,8 @@ const Resources = () => {
       dateAdded: "2024-01-20",
       downloads: 203,
       size: "1.8 MB",
-      pages: 35
+      pages: 35,
+      downloadUrl: "#"
     },
     {
       id: 3,
@@ -49,7 +50,8 @@ const Resources = () => {
       dateAdded: "2024-01-10",
       downloads: 89,
       size: "1.2 MB",
-      pages: 16
+      pages: 16,
+      downloadUrl: "#"
     },
     {
       id: 4,
@@ -61,7 +63,8 @@ const Resources = () => {
       dateAdded: "2024-01-25",
       downloads: 124,
       duration: "2.5 hours",
-      parts: 6
+      parts: 6,
+      downloadUrl: "#"
     },
     {
       id: 5,
@@ -73,7 +76,8 @@ const Resources = () => {
       dateAdded: "2024-01-05",
       downloads: 78,
       size: "3.1 MB",
-      pages: 42
+      pages: 42,
+      downloadUrl: "#"
     },
     {
       id: 6,
@@ -85,7 +89,8 @@ const Resources = () => {
       dateAdded: "2024-01-30",
       downloads: 167,
       size: "15.2 MB",
-      songs: 25
+      songs: 25,
+      downloadUrl: "#"
     },
     {
       id: 7,
@@ -97,7 +102,8 @@ const Resources = () => {
       dateAdded: "2024-01-12",
       downloads: 92,
       size: "2.8 MB",
-      pages: 28
+      pages: 28,
+      downloadUrl: "#"
     },
     {
       id: 8,
@@ -109,7 +115,8 @@ const Resources = () => {
       dateAdded: "2024-01-18",
       downloads: 134,
       size: "2.1 MB",
-      pages: 31
+      pages: 31,
+      downloadUrl: "#"
     },
     {
       id: 9,
@@ -121,7 +128,8 @@ const Resources = () => {
       dateAdded: "2024-01-22",
       downloads: 76,
       size: "1.9 MB",
-      pages: 20
+      pages: 20,
+      downloadUrl: "#"
     },
     {
       id: 10,
@@ -133,7 +141,8 @@ const Resources = () => {
       dateAdded: "2024-01-08",
       downloads: 64,
       size: "2.5 MB",
-      pages: 26
+      pages: 26,
+      downloadUrl: "#"
     }
   ];
 
@@ -170,6 +179,29 @@ const Resources = () => {
     });
   };
 
+  const handleDownload = (resource: any) => {
+    // Simulate download
+    console.log(`Downloading: ${resource.title}`);
+    // In a real app, this would trigger an actual download
+    window.open(resource.downloadUrl, '_blank');
+  };
+
+  const handleShare = (resource: any) => {
+    const shareData = {
+      title: resource.title,
+      text: resource.description,
+      url: window.location.origin + '/resources#' + resource.id,
+    };
+
+    if (navigator.share) {
+      navigator.share(shareData);
+    } else {
+      // Fallback to copying to clipboard
+      navigator.clipboard.writeText(`${resource.title} - ${shareData.url}`);
+      alert('Link copied to clipboard!');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -178,46 +210,22 @@ const Resources = () => {
       <section className="relative bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">Resources & Materials</h1>
+          <h1 className="text-4xl lg:text-6xl font-bold mb-6">Free Resources & Materials</h1>
           <p className="text-xl lg:text-2xl max-w-3xl mx-auto opacity-90">
-            Free resources to help you grow in your faith, leadership, and Christian walk
+            Growing in faith together through free resources, study guides, and spiritual materials for every believer
           </p>
         </div>
       </section>
 
-      {/* Resource Stats */}
-      <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                <BookOpen className="h-8 w-8 text-blue-600" />
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900">50+</h3>
-              <p className="text-gray-600">Resources</p>
-            </div>
-            <div>
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Download className="h-8 w-8 text-green-600" />
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900">1,200+</h3>
-              <p className="text-gray-600">Downloads</p>
-            </div>
-            <div>
-              <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                <User className="h-8 w-8 text-purple-600" />
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900">15</h3>
-              <p className="text-gray-600">Contributors</p>
-            </div>
-            <div>
-              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Calendar className="h-8 w-8 text-red-600" />
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900">Monthly</h3>
-              <p className="text-gray-600">Updates</p>
-            </div>
-          </div>
+      {/* Welcome Message */}
+      <section className="py-12 bg-gradient-to-b from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Resources for Your Journey</h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Whether you're a new believer or have been walking with Christ for years, 
+            these carefully curated resources will help you grow deeper in faith, 
+            understand God's word better, and live out your calling with purpose.
+          </p>
         </div>
       </section>
 
@@ -264,7 +272,7 @@ const Resources = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <Badge className="bg-yellow-500 text-white mb-4">FEATURED RESOURCE</Badge>
-              <h2 className="text-2xl font-bold text-gray-900">Most Popular</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Most Helpful</h2>
             </div>
             <Card className="overflow-hidden border-2 border-blue-600">
               <div className="md:flex">
@@ -291,19 +299,15 @@ const Resources = () => {
                       <Calendar className="h-4 w-4" />
                       <span>{formatDate(featuredResource.dateAdded)}</span>
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <Download className="h-4 w-4" />
-                      <span>{featuredResource.downloads} downloads</span>
-                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <Button>
+                  <div className="flex items-center gap-3">
+                    <Button onClick={() => handleDownload(featuredResource)}>
                       <Download className="h-4 w-4 mr-2" />
                       Download Resource
                     </Button>
-                    <Button variant="outline">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Preview
+                    <Button variant="outline" onClick={() => handleShare(featuredResource)}>
+                      <Share2 className="h-4 w-4 mr-2" />
+                      Share
                     </Button>
                   </div>
                 </div>
@@ -348,10 +352,6 @@ const Resources = () => {
                       <Calendar className="h-4 w-4" />
                       <span>{formatDate(resource.dateAdded)}</span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Download className="h-4 w-4" />
-                      <span>{resource.downloads} downloads</span>
-                    </div>
                     {resource.size && (
                       <div className="flex items-center space-x-2">
                         <BookOpen className="h-4 w-4" />
@@ -369,12 +369,12 @@ const Resources = () => {
                     )}
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="flex-1">
+                    <Button size="sm" className="flex-1" onClick={() => handleDownload(resource)}>
                       <Download className="h-4 w-4 mr-1" />
                       Download
                     </Button>
-                    <Button size="sm" variant="outline">
-                      <ExternalLink className="h-4 w-4" />
+                    <Button size="sm" variant="outline" onClick={() => handleShare(resource)}>
+                      <Share2 className="h-4 w-4" />
                     </Button>
                   </div>
                 </CardContent>
@@ -395,9 +395,9 @@ const Resources = () => {
       {/* Resource Request */}
       <section className="py-16 bg-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Need a Specific Resource?</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Looking for Something Specific?</h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Can't find what you're looking for? Let us know what resources would be helpful for your spiritual growth.
+            Can't find what you're looking for? Let us know what resources would help you in your spiritual journey, and we'll do our best to provide them.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold">
