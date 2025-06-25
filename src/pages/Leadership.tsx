@@ -206,11 +206,21 @@ const Leadership = () => {
                       <strong>Department:</strong> {leader.department}
                     </p>
                     <div className="flex space-x-2">
-                      <Button size="sm" variant="outline" className="flex-1">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="flex-1"
+                        onClick={() => window.location.href = `mailto:${leader.email}`}
+                      >
                         <Mail className="h-4 w-4 mr-1" />
                         Email
                       </Button>
-                      <Button size="sm" variant="outline" className="flex-1">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="flex-1"
+                        onClick={() => window.location.href = `tel:${leader.phone}`}
+                      >
                         <Phone className="h-4 w-4 mr-1" />
                         Call
                       </Button>

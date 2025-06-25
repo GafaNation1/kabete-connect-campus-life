@@ -22,10 +22,18 @@ const Footer = () => {
               Empowering students to grow in faith, fellowship, and service to God and community.
             </p>
             <div className="flex space-x-4">
-              <Facebook className="h-5 w-5 text-gray-400 hover:text-blue-500 cursor-pointer transition-colors" />
-              <Instagram className="h-5 w-5 text-gray-400 hover:text-pink-500 cursor-pointer transition-colors" />
-              <Twitter className="h-5 w-5 text-gray-400 hover:text-blue-400 cursor-pointer transition-colors" />
-              <Youtube className="h-5 w-5 text-gray-400 hover:text-red-500 cursor-pointer transition-colors" />
+              <a href="https://facebook.com/UKCCUOfficial" target="_blank" rel="noopener noreferrer">
+                <Facebook className="h-5 w-5 text-gray-400 hover:text-blue-500 cursor-pointer transition-colors" />
+              </a>
+              <a href="https://instagram.com/ukccu_official" target="_blank" rel="noopener noreferrer">
+                <Instagram className="h-5 w-5 text-gray-400 hover:text-pink-500 cursor-pointer transition-colors" />
+              </a>
+              <a href="https://twitter.com/UKCCU_Official" target="_blank" rel="noopener noreferrer">
+                <Twitter className="h-5 w-5 text-gray-400 hover:text-blue-400 cursor-pointer transition-colors" />
+              </a>
+              <a href="https://youtube.com/@UKCCUChannel" target="_blank" rel="noopener noreferrer">
+                <Youtube className="h-5 w-5 text-gray-400 hover:text-red-500 cursor-pointer transition-colors" />
+              </a>
             </div>
           </div>
 
@@ -63,11 +71,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300 text-sm">info@ukccu.org</span>
+                <a href="mailto:info@ukccu.org" className="text-gray-300 text-sm hover:text-white transition-colors">info@ukccu.org</a>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300 text-sm">+254 700 123 456</span>
+                <a href="tel:+254700123456" className="text-gray-300 text-sm hover:text-white transition-colors">+254 700 123 456</a>
               </div>
             </div>
           </div>

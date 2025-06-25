@@ -53,15 +53,16 @@ const Contact = () => {
   ];
 
   const socialMedia = [
-    { icon: Facebook, name: "Facebook", handle: "@UKCCUOfficial", color: "text-blue-600" },
-    { icon: Instagram, name: "Instagram", handle: "@ukccu_official", color: "text-pink-600" },
-    { icon: Twitter, name: "Twitter", handle: "@UKCCU_Official", color: "text-blue-400" },
-    { icon: Youtube, name: "YouTube", handle: "UKCCU Channel", color: "text-red-600" }
+    { icon: Facebook, name: "Facebook", handle: "@UKCCUOfficial", color: "text-blue-600", url: "https://facebook.com/UKCCUOfficial" },
+    { icon: Instagram, name: "Instagram", handle: "@ukccu_official", color: "text-pink-600", url: "https://instagram.com/ukccu_official" },
+    { icon: Twitter, name: "Twitter", handle: "@UKCCU_Official", color: "text-blue-400", url: "https://twitter.com/UKCCU_Official" },
+    { icon: Youtube, name: "YouTube", handle: "UKCCU Channel", color: "text-red-600", url: "https://youtube.com/@UKCCUChannel" }
   ];
 
   const officeLocation = {
     address: "University of Nairobi, Upper Kabete Campus",
-    directions: "Located in the Student Center building, 2nd floor, Room 201. Enter through the main student center entrance and take the stairs to the second floor."
+    directions: "Located in the Student Center building, 2nd floor, Room 201. Enter through the main student center entrance and take the stairs to the second floor.",
+    mapUrl: "https://www.google.com/maps/place/University+of+Nairobi+-+Upper+Kabete+Campus/@-1.2667,36.7333,17z/data=!3m1!4b1!4m6!3m5!1s0x182f1a6bf7445dc1:0x940b62a3c8efde09!8m2!3d-1.2667!4d36.7333!16s%2Fg%2F1hc1qkqpx"
   };
 
   return (
@@ -187,14 +188,21 @@ const Contact = () => {
                 <CardContent>
                   <p className="text-gray-700 mb-4">{officeLocation.address}</p>
                   <p className="text-gray-600 text-sm mb-4">{officeLocation.directions}</p>
-                  <Button variant="outline" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => window.open(officeLocation.mapUrl, '_blank')}
+                  >
                     Get Directions
                   </Button>
                 </CardContent>
               </Card>
 
               {/* Map Placeholder */}
-              <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center mb-6">
+              <div 
+                className="bg-gray-200 rounded-lg h-64 flex items-center justify-center mb-6 cursor-pointer hover:bg-gray-300 transition-colors"
+                onClick={() => window.open(officeLocation.mapUrl, '_blank')}
+              >
                 <div className="text-center">
                   <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-2" />
                   <p className="text-gray-500">Interactive Map</p>
@@ -210,15 +218,27 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start"
+                      onClick={() => window.location.href = 'tel:+254700123456'}
+                    >
                       <Phone className="h-4 w-4 mr-2" />
                       Call Main Office
                     </Button>
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start"
+                      onClick={() => window.location.href = 'mailto:info@ukccu.org'}
+                    >
                       <Mail className="h-4 w-4 mr-2" />
                       Email Us
                     </Button>
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start"
+                      onClick={() => window.open(officeLocation.mapUrl, '_blank')}
+                    >
                       <MapPin className="h-4 w-4 mr-2" />
                       Visit Office
                     </Button>
@@ -245,7 +265,11 @@ const Contact = () => {
             {socialMedia.map((platform, index) => {
               const Icon = platform.icon;
               return (
-                <Card key={index} className="text-center p-6 hover:shadow-lg transition-shadow cursor-pointer">
+                <Card 
+                  key={index} 
+                  className="text-center p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => window.open(platform.url, '_blank')}
+                >
                   <CardContent>
                     <div className="mb-4">
                       <Icon className={`h-12 w-12 mx-auto ${platform.color}`} />
@@ -317,11 +341,18 @@ const Contact = () => {
               If you're experiencing a spiritual, emotional, or personal crisis and need immediate prayer or counseling support:
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-red-600 hover:bg-red-700 text-white">
+              <Button 
+                className="bg-red-600 hover:bg-red-700 text-white"
+                onClick={() => window.location.href = 'tel:+254734567890'}
+              >
                 <Phone className="h-4 w-4 mr-2" />
                 Emergency Helpline: +254 734 567 890
               </Button>
-              <Button variant="outline" className="border-red-600 text-red-600 hover:bg-red-50">
+              <Button 
+                variant="outline" 
+                className="border-red-600 text-red-600 hover:bg-red-50"
+                onClick={() => window.location.href = 'mailto:crisis@ukccu.org'}
+              >
                 <Mail className="h-4 w-4 mr-2" />
                 crisis@ukccu.org
               </Button>

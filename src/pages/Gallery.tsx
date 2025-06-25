@@ -1,9 +1,9 @@
-
 import { useState } from "react";
-import { Calendar, Camera, Users, Heart, Search, Filter } from "lucide-react";
+import { Calendar, Camera, Users, Heart, Search, Filter, Play, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -89,6 +89,69 @@ const Gallery = () => {
     { id: 53, src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&h=300&fit=crop", title: "Testimony Night", category: "events", date: "2024-06-30" }
   ];
 
+  const featuredVideos = [
+    {
+      id: 1,
+      title: "UKCCU Annual Conference 2024 Highlights",
+      description: "Experience the power of God at our annual conference with worship, testimonies, and inspiring messages",
+      thumbnail: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&h=300&fit=crop",
+      duration: "15:32",
+      views: "2.3K",
+      youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      category: "events"
+    },
+    {
+      id: 2,
+      title: "Sunday Worship Service - March 2024",
+      description: "Join us for powerful worship and a life-changing message on faith and purpose",
+      thumbnail: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=300&fit=crop",
+      duration: "45:20",
+      views: "1.8K",
+      youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      category: "worship"
+    },
+    {
+      id: 3,
+      title: "Testimony: From Darkness to Light",
+      description: "A powerful testimony of transformation and God's grace in the life of one of our members",
+      thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+      duration: "8:45",
+      views: "3.1K",
+      youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      category: "testimony"
+    },
+    {
+      id: 4,
+      title: "Community Outreach - Feeding the Needy",
+      description: "Watch how we serve our community through feeding programs and acts of kindness",
+      thumbnail: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop",
+      duration: "12:18",
+      views: "1.5K",
+      youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      category: "outreach"
+    },
+    {
+      id: 5,
+      title: "Youth Ministry - Building Future Leaders",
+      description: "See how our youth ministry is raising the next generation of Christian leaders",
+      thumbnail: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop",
+      duration: "10:55",
+      views: "2.7K",
+      youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      category: "youth"
+    },
+    {
+      id: 6,
+      title: "Prayer and Worship Night",
+      description: "An evening of powerful prayer and worship that moved hearts and changed lives",
+      thumbnail: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop",
+      duration: "32:14",
+      views: "4.2K",
+      youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      category: "worship"
+    }
+  ];
+
   const categories = [
     { value: "all", label: "All Photos" },
     { value: "worship", label: "Worship & Music" },
@@ -117,6 +180,71 @@ const Gallery = () => {
           <p className="text-xl lg:text-2xl max-w-3xl mx-auto opacity-90">
             Capturing moments of faith, fellowship, and service in our community
           </p>
+        </div>
+      </section>
+
+      {/* Featured Videos Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Featured Videos</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Watch our ministry moments, testimonies, and worship experiences on YouTube
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {featuredVideos.map((video) => (
+              <Card key={video.id} className="group hover:shadow-lg transition-shadow cursor-pointer">
+                <div className="relative overflow-hidden rounded-t-lg">
+                  <img
+                    src={video.thumbnail}
+                    alt={video.title}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center">
+                    <Play className="h-12 w-12 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                    {video.duration}
+                  </div>
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-lg">{video.title}</CardTitle>
+                  <CardDescription className="text-sm">
+                    {video.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm text-gray-500">{video.views} views</span>
+                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded capitalize">
+                      {video.category}
+                    </span>
+                  </div>
+                  <Button 
+                    className="w-full"
+                    onClick={() => window.open(video.youtubeUrl, '_blank')}
+                  >
+                    <Play className="h-4 w-4 mr-2" />
+                    Watch on YouTube
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => window.open('https://youtube.com/@UKCCUChannel', '_blank')}
+            >
+              <ExternalLink className="h-5 w-5 mr-2" />
+              Visit Our YouTube Channel
+            </Button>
+          </div>
         </div>
       </section>
 
