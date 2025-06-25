@@ -39,7 +39,7 @@ const Navigation = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation - Always visible */}
+          {/* Desktop Navigation - Always visible with improved styling */}
           <div className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -47,14 +47,14 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                     isActive(item.path)
-                      ? "bg-blue-600 text-white shadow-md"
-                      : "text-gray-700 bg-gray-50 hover:text-blue-600 hover:bg-blue-50 hover:shadow-sm"
+                      ? "bg-blue-600 text-white shadow-lg transform scale-105"
+                      : "text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover:shadow-md hover:scale-105"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
-                  <span>{item.name}</span>
+                  <span className="font-medium">{item.name}</span>
                 </Link>
               );
             })}
@@ -83,14 +83,14 @@ const Navigation = () => {
                     key={item.name}
                     to={item.path}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ${
                       isActive(item.path)
-                        ? "bg-blue-600 text-white"
-                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                        ? "bg-blue-600 text-white shadow-md"
+                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover:shadow-sm"
                     }`}
                   >
                     <Icon className="h-5 w-5" />
-                    <span>{item.name}</span>
+                    <span className="font-medium">{item.name}</span>
                   </Link>
                 );
               })}

@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { Calendar, Clock, MapPin, Users, Filter, ChevronRight, Heart, BookOpen, Music } from "lucide-react";
+import { Calendar, Clock, MapPin, Users, Filter, ChevronRight, Heart, BookOpen, Music, Download, Share2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -147,6 +146,49 @@ const Events = () => {
     });
   };
 
+  const handleSubscribeToCalendar = () => {
+    // Create ICS calendar file content
+    const calendarData = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//UKCCU//Event Calendar//EN
+CALNAME:UKCCU Events
+X-WR-CALNAME:UKCCU Events
+DESCRIPTION:Upper Kabete Campus Christian Union Events Calendar
+X-WR-CALDESC:Upper Kabete Campus Christian Union Events Calendar
+${upcomingEvents.map(event => {
+  const startDate = new Date(event.date).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  return `BEGIN:VEVENT
+UID:${event.id}@ukccu.org
+DTSTART:${startDate}
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+STATUS:CONFIRMED
+END:VEVENT`;
+}).join('\n')}
+END:VCALENDAR`;
+
+    // Create downloadable file
+    const blob = new Blob([calendarData], { type: 'text/calendar' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'ukccu-events-calendar.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    // Also provide Google Calendar link
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=UKCCU+Events&details=Subscribe+to+Upper+Kabete+Campus+Christian+Union+events+calendar`;
+    window.open(googleCalendarUrl, '_blank');
+  };
+
+  const handleDownloadApp = () => {
+    // Simulate app download - in real scenario, this would link to app stores
+    alert('Church app download will be available soon! For now, bookmark our website and add it to your home screen.');
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -189,7 +231,7 @@ const Events = () => {
                   variant={selectedCategory === category.value ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedCategory(category.value)}
-                  className="flex items-center space-x-1"
+                  className="flex items-center space-x-1 hover:shadow-md transition-all duration-300"
                 >
                   <Icon className="h-4 w-4" />
                   <span>{category.label}</span>
@@ -247,7 +289,7 @@ const Events = () => {
                       <span>{event.attendees} expected</span>
                     </div>
                   </div>
-                  <Button className="w-full md:w-auto">
+                  <Button className="w-full md:w-auto hover:shadow-lg transition-all duration-300">
                     Register Now
                     <ChevronRight className="h-4 w-4 ml-1" />
                   </Button>
@@ -259,7 +301,7 @@ const Events = () => {
           {/* Regular Events Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredUpcoming.filter(event => !event.featured).map(event => (
-              <Card key={event.id} className="hover:shadow-lg transition-shadow overflow-hidden">
+              <Card key={event.id} className="hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
                 <div className="relative">
                   <img 
                     src={event.image} 
@@ -296,7 +338,7 @@ const Events = () => {
                       <span>{event.attendees} expected</span>
                     </div>
                   </div>
-                  <Button className="w-full" size="sm">
+                  <Button className="w-full hover:shadow-md transition-all duration-300" size="sm">
                     More Details
                   </Button>
                 </CardContent>
@@ -319,7 +361,7 @@ const Events = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPast.map(event => (
-              <Card key={event.id} className="hover:shadow-lg transition-shadow overflow-hidden">
+              <Card key={event.id} className="hover:shadow-lg transition-all duration-300 hover:scale-105 overflow-hidden">
                 <div className="relative">
                   <img 
                     src={event.image} 
@@ -345,7 +387,7 @@ const Events = () => {
                       <span>{event.attendees} attended</span>
                     </div>
                   </div>
-                  <Button variant="outline" className="w-full" size="sm">
+                  <Button variant="outline" className="w-full hover:shadow-md transition-all duration-300" size="sm">
                     View Photos
                   </Button>
                 </CardContent>
@@ -363,11 +405,21 @@ const Events = () => {
             Subscribe to our calendar and get notifications about upcoming events, meetings, and special programs
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold">
+            <Button 
+              size="lg" 
+              className="bg-white text-blue-600 hover:bg-gray-100 font-semibold hover:shadow-lg transition-all duration-300"
+              onClick={handleSubscribeToCalendar}
+            >
               <Calendar className="h-5 w-5 mr-2" />
               Subscribe to Calendar
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 font-semibold">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-blue-600 font-semibold hover:shadow-lg transition-all duration-300"
+              onClick={handleDownloadApp}
+            >
+              <Download className="h-5 w-5 mr-2" />
               Download Church App
             </Button>
           </div>

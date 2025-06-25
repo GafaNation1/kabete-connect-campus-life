@@ -1,353 +1,534 @@
 
-import { Heart, Users, BookOpen, Mic, Camera, Handshake, Globe, Baby, Cross, Music } from "lucide-react";
+import { useState } from "react";
+import { Heart, Users, Music, BookOpen, Globe, Cross, Baby, Headphones, Camera, HandHeart, ChevronRight, ArrowRight, MessageCircle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 const Ministries = () => {
+  const [selectedMinistry, setSelectedMinistry] = useState<any>(null);
+
   const ministries = [
     {
       id: 1,
       title: "Worship & Music Ministry",
+      shortDescription: "Leading the congregation in worship through music, song, and praise",
+      fullDescription: "Our Worship & Music Ministry is the heartbeat of our church services. We believe that worship is not just singing songs, but it's about creating an atmosphere where people can encounter God personally. Our team consists of talented musicians, singers, sound engineers, and worship leaders who work together to facilitate meaningful worship experiences.",
       icon: Music,
-      description: "Leading the congregation in heartfelt worship and praise through music, song, and creative expression.",
-      leader: "Peter Otieno",
-      meetingTime: "Saturdays 4:00 PM",
-      location: "Music Room, Student Center",
+      leader: "David Mwangi",
+      members: 45,
+      meetingTime: "Wednesdays 6:00 PM",
+      location: "Main Sanctuary",
       activities: [
-        "Sunday worship leading",
-        "Choir practices and performances",
-        "Special music events",
-        "Worship workshops",
-        "Instrument training"
+        "Sunday Morning Worship",
+        "Wednesday Evening Rehearsals", 
+        "Special Event Performances",
+        "Worship Nights",
+        "Music Training Sessions"
       ],
-      requirements: "Musical ability (any level), heart for worship",
-      image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=250&fit=crop",
-      members: 25,
-      established: "2015"
+      requirements: [
+        "Heart for worship and ministry",
+        "Basic musical skills (voice or instrument)",
+        "Commitment to regular practice",
+        "Willingness to learn and grow"
+      ],
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop",
+      featured: true
     },
     {
       id: 2,
-      title: "Bible Study & Teaching Ministry",
+      title: "Bible Study Ministry",
+      shortDescription: "Deep study of God's Word through various study groups and programs",
+      fullDescription: "Our Bible Study Ministry is committed to helping believers grow deeper in their understanding of God's Word. We offer various study groups for different levels - from new believers to mature Christians who want to delve deeper into theological concepts. Our approach combines careful exegesis with practical application.",
       icon: BookOpen,
-      description: "Facilitating deep study of God's Word through various teaching methods and small group discussions.",
-      leader: "Sarah Achieng",
-      meetingTime: "Wednesdays 6:00 PM",
-      location: "Lecture Hall 3",
+      leader: "Grace Wanjiku",
+      members: 89,
+      meetingTime: "Multiple times weekly",
+      location: "Various locations",
       activities: [
-        "Weekly Bible study sessions",
-        "Topical study series",
-        "Biblical literacy programs",
-        "Teacher training workshops",
-        "Study material development"
+        "Wednesday Evening Bible Study",
+        "Sunday Morning Adult Classes",
+        "Small Group Studies", 
+        "Topical Study Series",
+        "Leadership Bible Study"
       ],
-      requirements: "Love for God's Word, willingness to study and teach",
-      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=250&fit=crop",
-      members: 35,
-      established: "2010"
+      requirements: [
+        "Desire to study God's Word",
+        "Commitment to regular attendance",
+        "Willingness to participate in discussions",
+        "Heart for spiritual growth"
+      ],
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=300&fit=crop"
     },
     {
       id: 3,
-      title: "Outreach & Evangelism Ministry",
-      icon: Globe,
-      description: "Reaching out to the campus and local community with the love of Christ through various outreach programs.",
-      leader: "Faith Njeri",
-      meetingTime: "Sundays 2:00 PM",
-      location: "Conference Room A",
+      title: "Youth Ministry",
+      shortDescription: "Empowering young people to live for Christ and make a difference",
+      fullDescription: "Our Youth Ministry focuses on discipling teenagers and young adults (ages 13-25) through dynamic programs that address their unique challenges and opportunities. We create a safe space where young people can ask tough questions, build lasting friendships, and discover their God-given purpose.",
+      icon: Users,
+      leader: "Samuel Kipchoge",
+      members: 123,
+      meetingTime: "Fridays 7:00 PM",
+      location: "Youth Hall",
       activities: [
-        "Campus evangelism",
-        "Community service projects",
-        "Hospital and prison visits",
-        "Feeding programs",
-        "Medical camps"
+        "Friday Night Youth Service",
+        "Monthly Youth Camps",
+        "Community Service Projects",
+        "Youth Leadership Training",
+        "Sports and Recreation"
       ],
-      requirements: "Heart for the lost, compassion for others",
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=250&fit=crop",
-      members: 40,
-      established: "2012"
+      requirements: [
+        "Age 13-25 years",
+        "Heart for God and peers",
+        "Willingness to be mentored",
+        "Commitment to group activities"
+      ],
+      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&h=300&fit=crop"
     },
     {
       id: 4,
       title: "Women's Ministry",
+      shortDescription: "Supporting women in their spiritual journey and life challenges",
+      fullDescription: "Our Women's Ministry creates a nurturing environment where women of all ages can grow spiritually, emotionally, and relationally. We address issues specific to women while building a strong sisterhood rooted in Christ's love. Our programs range from Bible studies to practical life skills workshops.",
       icon: Heart,
-      description: "Empowering and discipling women to discover their identity in Christ and fulfill their God-given purpose.",
-      leader: "Esther Mbugua",
-      meetingTime: "Saturdays 10:00 AM",
-      location: "Women's Fellowship Hall",
+      leader: "Mary Njeri",
+      members: 78,
+      meetingTime: "Saturdays 2:00 PM", 
+      location: "Fellowship Hall",
       activities: [
-        "Women's fellowship meetings",
-        "Mentorship programs",
-        "Life skills workshops",
-        "Mother's support groups",
-        "Women's conferences"
+        "Weekly Women's Bible Study",
+        "Monthly Women's Fellowship",
+        "Marriage and Parenting Workshops",
+        "Community Outreach Programs",
+        "Prayer and Intercession Groups"
       ],
-      requirements: "Female students and staff members",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=250&fit=crop",
-      members: 45,
-      established: "2011"
+      requirements: [
+        "Heart for fellowship with other women",
+        "Desire for spiritual growth",
+        "Willingness to support others",
+        "Commitment to ministry activities"
+      ],
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=300&fit=crop"
     },
     {
       id: 5,
       title: "Men's Ministry",
+      shortDescription: "Building godly men who lead their families and communities well",
+      fullDescription: "Our Men's Ministry focuses on developing authentic Christian manhood through biblical teaching, mentorship, and practical application. We address the unique challenges men face in today's world while equipping them to be spiritual leaders in their homes, workplaces, and communities.",
       icon: Users,
-      description: "Building strong, godly men who lead with integrity and serve their families and communities faithfully.",
-      leader: "John Maina",
-      meetingTime: "Saturdays 7:00 AM",
-      location: "Men's Fellowship Room",
+      leader: "Peter Kamau",
+      members: 62,
+      meetingTime: "Saturdays 8:00 AM",
+      location: "Men's Hall",
       activities: [
-        "Men's fellowship breakfast",
-        "Leadership development",
-        "Accountability groups",
-        "Fatherhood seminars",
-        "Men's retreats"
+        "Monthly Men's Breakfast",
+        "Bible Study and Discussion Groups",
+        "Mentorship Programs",
+        "Community Service Projects",
+        "Outdoor Activities and Retreats"
       ],
-      requirements: "Male students and staff members",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=250&fit=crop",
-      members: 30,
-      established: "2013"
+      requirements: [
+        "Commitment to personal growth",
+        "Willingness to be mentored and mentor others",
+        "Heart for spiritual leadership",
+        "Regular attendance at activities"
+      ],
+      image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=500&h=300&fit=crop"
     },
     {
       id: 6,
-      title: "Media & Technology Ministry",
-      icon: Camera,
-      description: "Using technology and media to enhance worship experiences and expand our ministry reach digitally.",
-      leader: "Daniel Wekesa",
-      meetingTime: "Fridays 5:00 PM",
-      location: "Media Center",
+      title: "Children's Ministry",
+      shortDescription: "Nurturing children's faith through age-appropriate programs and activities",
+      fullDescription: "Our Children's Ministry is dedicated to introducing children to Jesus in fun, engaging, and age-appropriate ways. We believe that children are not just the church of tomorrow, but the church of today. Our programs are designed to help children develop a personal relationship with Jesus while having fun and making friends.",
+      icon: Baby,
+      leader: "Ruth Wambui",
+      members: 34,
+      meetingTime: "Sundays 10:00 AM",
+      location: "Children's Wing",
       activities: [
-        "Live streaming services",
-        "Social media management",
-        "Photography and videography",
-        "Website maintenance",
-        "Audio/visual equipment operation"
+        "Sunday School Classes",
+        "Children's Church Service",
+        "Vacation Bible School",
+        "Children's Choir",
+        "Family Fun Events"
       ],
-      requirements: "Technical skills, creativity, attention to detail",
-      image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=400&h=250&fit=crop",
-      members: 15,
-      established: "2018"
+      requirements: [
+        "Love for children",
+        "Background check clearance",
+        "Patience and enthusiasm",
+        "Commitment to child safety"
+      ],
+      image: "https://images.unsplash.com/photo-1587616213116-e0f29cf02082?w=500&h=300&fit=crop"
     },
     {
       id: 7,
-      title: "Youth & Children's Ministry",
-      icon: Baby,
-      description: "Nurturing the next generation through age-appropriate programs that make faith fun and relevant.",
-      leader: "Grace Wanjiku",
-      meetingTime: "Sundays 9:00 AM",
-      location: "Children's Wing",
+      title: "Evangelism & Outreach",
+      shortDescription: "Sharing the Gospel and serving our community with Christ's love",
+      fullDescription: "Our Evangelism & Outreach Ministry is passionate about sharing the good news of Jesus Christ both locally and globally. We organize various outreach programs, community service projects, and evangelistic events to reach people with the love of God and meet practical needs in our community.",
+      icon: Globe,
+      leader: "John Ochieng",
+      members: 56,
+      meetingTime: "Thursdays 6:30 PM",
+      location: "Conference Room",
       activities: [
-        "Sunday school classes",
-        "Youth camps and retreats",
-        "Children's church services",
-        "Holiday Bible school",
-        "Youth mentorship programs"
+        "Community Evangelism",
+        "Street Ministry", 
+        "Hospital and Prison Visits",
+        "Food Distribution Programs",
+        "Mission Trips"
       ],
-      requirements: "Love for children, patience, creativity",
-      image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400&h=250&fit=crop",
-      members: 20,
-      established: "2014"
+      requirements: [
+        "Heart for evangelism",
+        "Compassion for the lost and needy",
+        "Willingness to step out of comfort zone",
+        "Commitment to training and preparation"
+      ],
+      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=500&h=300&fit=crop"
     },
     {
       id: 8,
-      title: "Prayer & Intercession Ministry",
-      icon: Cross,
-      description: "Standing in the gap through strategic prayer for our fellowship, campus, nation, and the world.",
-      leader: "Pastor Michael Kamau",
-      meetingTime: "Daily 6:00 AM & 6:00 PM",
-      location: "Prayer Room",
+      title: "Media & Technology",
+      shortDescription: "Supporting church services and events through audio/visual technology",
+      fullDescription: "Our Media & Technology Ministry ensures that our services run smoothly through professional audio, video, and lighting support. We also manage our online presence, live streaming, and social media platforms to extend our reach beyond the physical church building.",
+      icon: Headphones,
+      leader: "Mark Kiprotich",
+      members: 28,
+      meetingTime: "Sundays 8:00 AM",
+      location: "Media Room",
       activities: [
-        "Daily prayer meetings",
-        "Prayer walks around campus",
-        "Intercessory prayer training",
-        "24/7 prayer chains",
-        "Special prayer vigils"
+        "Sunday Service Audio/Video",
+        "Live Streaming Services",
+        "Social Media Management",
+        "Website Maintenance",
+        "Special Event Coverage"
       ],
-      requirements: "Commitment to prayer, faith in God's power",
-      image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=250&fit=crop",
-      members: 50,
-      established: "2009"
+      requirements: [
+        "Technical skills or willingness to learn",
+        "Reliability and punctuality",
+        "Heart for serving behind the scenes",
+        "Commitment to excellence"
+      ],
+      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500&h=300&fit=crop"
     },
     {
       id: 9,
-      title: "Hospitality & Welcome Ministry",
-      icon: Handshake,
-      description: "Creating a warm, welcoming environment for all visitors and ensuring everyone feels at home.",
-      leader: "Mary Nyambura",
-      meetingTime: "Sundays 8:00 AM",
-      location: "Main Entrance",
+      title: "Hospitality Ministry",
+      shortDescription: "Creating a welcoming environment for all who visit our church",
+      fullDescription: "Our Hospitality Ministry ensures that everyone who walks through our doors feels welcomed, loved, and valued. We coordinate greeting, ushering, refreshments, and special events to create an atmosphere of warmth and fellowship that reflects Christ's love.",
+      icon: HandHeart,
+      leader: "Sarah Mutua",
+      members: 41,
+      meetingTime: "Sundays 9:00 AM",
+      location: "Church Lobby",
       activities: [
-        "Greeting visitors and members",
-        "Visitor follow-up programs",
-        "Fellowship meal coordination",
-        "Event hospitality services",
-        "Welcome gift preparation"
+        "Sunday Morning Greeting",
+        "Ushering Services",
+        "Coffee and Fellowship Time",
+        "Special Event Catering",
+        "New Member Integration"
       ],
-      requirements: "Friendly personality, servant's heart",
-      image: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400&h=250&fit=crop",
-      members: 28,
-      established: "2016"
+      requirements: [
+        "Friendly and welcoming personality",
+        "Heart for serving others",
+        "Punctuality and reliability",
+        "Willingness to work as a team"
+      ],
+      image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=500&h=300&fit=crop"
+    },
+    {
+      id: 10,
+      title: "Prayer Ministry",
+      shortDescription: "Interceding for the church, community, and global missions",
+      fullDescription: "Our Prayer Ministry believes in the power of prayer to transform lives, heal relationships, and advance God's kingdom. We coordinate various prayer initiatives, provide prayer support for church members, and maintain a constant cover of prayer over our church and community.",
+      icon: Cross,
+      leader: "Hannah Muthoni",
+      members: 67,
+      meetingTime: "Daily 6:00 AM",
+      location: "Prayer Room",
+      activities: [
+        "Daily Morning Prayer",
+        "Weekly Prayer Meetings",
+        "Prayer Chains for Urgent Needs",
+        "Healing Prayer Services",
+        "24/7 Prayer Vigils"
+      ],
+      requirements: [
+        "Committed prayer life",
+        "Heart for intercession",
+        "Confidentiality and trustworthiness",
+        "Availability for emergency prayer"
+      ],
+      image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&h=300&fit=crop"
     }
   ];
 
-  const ministryStats = [
-    { title: "Active Ministries", value: 9, icon: Cross },
-    { title: "Ministry Leaders", value: 15, icon: Users },
-    { title: "Total Volunteers", value: 280, icon: Heart },
-    { title: "Years of Service", value: 14, icon: BookOpen }
-  ];
+  const handleLearnMore = (ministry: any) => {
+    setSelectedMinistry(ministry);
+  };
 
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
+      <section className="relative bg-gradient-to-r from-purple-600 to-blue-600 text-white py-20">
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl lg:text-6xl font-bold mb-6">Our Ministries</h1>
           <p className="text-xl lg:text-2xl max-w-3xl mx-auto opacity-90">
-            Discover your place to serve and grow in our diverse ministry opportunities
+            Find your place to serve, grow, and make a difference in the lives of others through our various ministry opportunities
           </p>
         </div>
       </section>
 
-      {/* Ministry Stats */}
-      <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {ministryStats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index}>
-                  <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Icon className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-900">{stat.value}</h3>
-                  <p className="text-gray-600">{stat.title}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Ministry Vision */}
+      {/* Featured Ministry */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Our Ministry Vision</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Every member is a minister. We believe God has gifted each person uniquely to serve His kingdom. 
-              Our ministries provide opportunities for you to discover, develop, and deploy your gifts for God's glory.
-            </p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Featured Ministry</h2>
+            <div className="w-24 h-1 bg-purple-600 mx-auto mb-6"></div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center p-6">
-              <CardContent>
-                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Discover Your Gifts</h3>
-                <p className="text-gray-600">Identify the unique talents and spiritual gifts God has given you</p>
-              </CardContent>
-            </Card>
+          {ministries.filter(ministry => ministry.featured).map(ministry => {
+            const Icon = ministry.icon;
+            return (
+              <Card key={ministry.id} className="mb-8 overflow-hidden border-2 border-purple-600">
+                <div className="md:flex">
+                  <div className="md:w-1/3">
+                    <img 
+                      src={ministry.image} 
+                      alt={ministry.title}
+                      className="w-full h-64 md:h-full object-cover"
+                    />
+                  </div>
+                  <div className="md:w-2/3 p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <Badge className="bg-yellow-500 text-white">FEATURED</Badge>
+                      <div className="flex items-center space-x-2 text-gray-600">
+                        <Icon className="h-5 w-5" />
+                        <span>{ministry.members} Members</span>
+                      </div>
+                    </div>
+                    <CardTitle className="text-2xl mb-4">{ministry.title}</CardTitle>
+                    <CardDescription className="text-base mb-4">{ministry.fullDescription}</CardDescription>
+                    <div className="grid md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <p className="font-semibold text-gray-700">Leader:</p>
+                        <p className="text-gray-600">{ministry.leader}</p>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-700">Meeting Time:</p>
+                        <p className="text-gray-600">{ministry.meetingTime}</p>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button onClick={() => handleLearnMore(ministry)}>
+                            Learn More
+                            <ChevronRight className="h-4 w-4 ml-1" />
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                          <DialogHeader>
+                            <DialogTitle className="flex items-center space-x-2">
+                              <Icon className="h-6 w-6 text-purple-600" />
+                              <span>{ministry.title}</span>
+                            </DialogTitle>
+                            <DialogDescription className="text-base">
+                              {ministry.fullDescription}
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="space-y-6">
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-2">Ministry Details</h4>
+                              <div className="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                  <p className="font-medium">Leader:</p>
+                                  <p className="text-gray-600">{ministry.leader}</p>
+                                </div>
+                                <div>
+                                  <p className="font-medium">Members:</p>
+                                  <p className="text-gray-600">{ministry.members}</p>
+                                </div>
+                                <div>
+                                  <p className="font-medium">Meeting Time:</p>
+                                  <p className="text-gray-600">{ministry.meetingTime}</p>
+                                </div>
+                                <div>
+                                  <p className="font-medium">Location:</p>
+                                  <p className="text-gray-600">{ministry.location}</p>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-2">Activities</h4>
+                              <ul className="list-disc list-inside space-y-1 text-gray-600">
+                                {ministry.activities.map((activity, index) => (
+                                  <li key={index}>{activity}</li>
+                                ))}
+                              </ul>
+                            </div>
 
-            <Card className="text-center p-6">
-              <CardContent>
-                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-green-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Develop Your Skills</h3>
-                <p className="text-gray-600">Grow and strengthen your abilities through training and mentorship</p>
-              </CardContent>
-            </Card>
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-2">Requirements</h4>
+                              <ul className="list-disc list-inside space-y-1 text-gray-600">
+                                {ministry.requirements.map((requirement, index) => (
+                                  <li key={index}>{requirement}</li>
+                                ))}
+                              </ul>
+                            </div>
 
-            <Card className="text-center p-6">
-              <CardContent>
-                <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Globe className="h-8 w-8 text-purple-600" />
+                            <div className="flex space-x-2 pt-4">
+                              <Button className="flex-1">
+                                Join This Ministry
+                              </Button>
+                              <Button variant="outline" asChild>
+                                <Link to="/whatsapp-groups">
+                                  <MessageCircle className="h-4 w-4 mr-2" />
+                                  Join WhatsApp Group
+                                </Link>
+                              </Button>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                      <Button variant="outline" asChild>
+                        <Link to="/whatsapp-groups">
+                          <MessageCircle className="h-4 w-4 mr-2" />
+                          WhatsApp Group
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Deploy for Impact</h3>
-                <p className="text-gray-600">Use your gifts to make a difference in our community and beyond</p>
-              </CardContent>
-            </Card>
-          </div>
+              </Card>
+            );
+          })}
         </div>
       </section>
 
-      {/* Ministries Grid */}
+      {/* All Ministries */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Ministry Opportunities</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">All Ministries</h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore our various ministries and find where God is calling you to serve
+              Explore all our ministry opportunities and find where God is calling you to serve
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {ministries.map((ministry) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ministries.filter(ministry => !ministry.featured).map(ministry => {
               const Icon = ministry.icon;
               return (
-                <Card key={ministry.id} className="hover:shadow-lg transition-shadow overflow-hidden">
+                <Card key={ministry.id} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
                   <div className="relative">
                     <img 
                       src={ministry.image} 
                       alt={ministry.title}
                       className="w-full h-48 object-cover"
                     />
-                    <div className="absolute top-2 right-2 flex space-x-1">
-                      <Badge className="bg-blue-600 text-white">
-                        {ministry.members} members
-                      </Badge>
-                    </div>
-                    <div className="absolute top-2 left-2">
-                      <div className="bg-white p-2 rounded-full">
-                        <Icon className="h-6 w-6 text-blue-600" />
-                      </div>
+                    <div className="absolute top-2 right-2 bg-white bg-opacity-90 p-2 rounded-full">
+                      <Icon className="h-5 w-5 text-purple-600" />
                     </div>
                   </div>
                   <CardHeader>
-                    <CardTitle className="text-lg">{ministry.title}</CardTitle>
-                    <CardDescription>{ministry.description}</CardDescription>
+                    <div className="flex items-center justify-between mb-2">
+                      <CardTitle className="text-lg">{ministry.title}</CardTitle>
+                      <span className="text-sm text-gray-500">{ministry.members} members</span>
+                    </div>
+                    <CardDescription>{ministry.shortDescription}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-3 mb-4">
-                      <div className="text-sm">
-                        <strong>Leader:</strong> {ministry.leader}
-                      </div>
-                      <div className="text-sm">
-                        <strong>Meeting Time:</strong> {ministry.meetingTime}
-                      </div>
-                      <div className="text-sm">
-                        <strong>Location:</strong> {ministry.location}
-                      </div>
-                      <div className="text-sm">
-                        <strong>Established:</strong> {ministry.established}
-                      </div>
+                    <div className="space-y-2 mb-4 text-sm text-gray-600">
+                      <p><span className="font-medium">Leader:</span> {ministry.leader}</p>
+                      <p><span className="font-medium">Meets:</span> {ministry.meetingTime}</p>
                     </div>
+                    <div className="flex space-x-2">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button size="sm" className="flex-1" onClick={() => handleLearnMore(ministry)}>
+                            Learn More
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                          <DialogHeader>
+                            <DialogTitle className="flex items-center space-x-2">
+                              <Icon className="h-6 w-6 text-purple-600" />
+                              <span>{ministry.title}</span>
+                            </DialogTitle>
+                            <DialogDescription className="text-base">
+                              {ministry.fullDescription}
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="space-y-6">
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-2">Ministry Details</h4>
+                              <div className="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                  <p className="font-medium">Leader:</p>
+                                  <p className="text-gray-600">{ministry.leader}</p>
+                                </div>
+                                <div>
+                                  <p className="font-medium">Members:</p>
+                                  <p className="text-gray-600">{ministry.members}</p>
+                                </div>
+                                <div>
+                                  <p className="font-medium">Meeting Time:</p>
+                                  <p className="text-gray-600">{ministry.meetingTime}</p>
+                                </div>
+                                <div>
+                                  <p className="font-medium">Location:</p>
+                                  <p className="text-gray-600">{ministry.location}</p>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-2">Activities</h4>
+                              <ul className="list-disc list-inside space-y-1 text-gray-600">
+                                {ministry.activities.map((activity, index) => (
+                                  <li key={index}>{activity}</li>
+                                ))}
+                              </ul>
+                            </div>
 
-                    <div className="mb-4">
-                      <h4 className="font-semibold text-sm mb-2">Key Activities:</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
-                        {ministry.activities.slice(0, 3).map((activity, idx) => (
-                          <li key={idx}>• {activity}</li>
-                        ))}
-                      </ul>
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-2">Requirements</h4>
+                              <ul className="list-disc list-inside space-y-1 text-gray-600">
+                                {ministry.requirements.map((requirement, index) => (
+                                  <li key={index}>{requirement}</li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className="flex space-x-2 pt-4">
+                              <Button className="flex-1">
+                                Join This Ministry
+                              </Button>
+                              <Button variant="outline" asChild>
+                                <Link to="/whatsapp-groups">
+                                  <MessageCircle className="h-4 w-4 mr-2" />
+                                  Join WhatsApp Group
+                                </Link>
+                              </Button>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                      <Button size="sm" variant="outline" asChild>
+                        <Link to="/whatsapp-groups">
+                          <MessageCircle className="h-4 w-4" />
+                        </Link>
+                      </Button>
                     </div>
-
-                    <div className="mb-4">
-                      <h4 className="font-semibold text-sm mb-1">Requirements:</h4>
-                      <p className="text-sm text-gray-600">{ministry.requirements}</p>
-                    </div>
-
-                    <Button className="w-full" size="sm">
-                      Join This Ministry
-                    </Button>
                   </CardContent>
                 </Card>
               );
@@ -356,74 +537,25 @@ const Ministries = () => {
         </div>
       </section>
 
-      {/* Ministry Leadership */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Ministry Leadership</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our ministry leaders are committed to serving, training, and empowering others to fulfill their calling
-            </p>
-          </div>
-
-          <div className="bg-blue-50 rounded-lg p-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Leadership Principles</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start space-x-2">
-                    <div className="bg-blue-600 w-2 h-2 rounded-full mt-2"></div>
-                    <span className="text-gray-700">Servant leadership - leading by serving others</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <div className="bg-blue-600 w-2 h-2 rounded-full mt-2"></div>
-                    <span className="text-gray-700">Biblical foundation - all decisions rooted in God's Word</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <div className="bg-blue-600 w-2 h-2 rounded-full mt-2"></div>
-                    <span className="text-gray-700">Collaborative approach - working together as a team</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <div className="bg-blue-600 w-2 h-2 rounded-full mt-2"></div>
-                    <span className="text-gray-700">Developing others - raising up new leaders</span>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Leadership Development</h3>
-                <p className="text-gray-700 mb-4">
-                  We're committed to developing emerging leaders through mentorship, training programs, 
-                  and hands-on ministry experience.
-                </p>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Monthly leadership training sessions</li>
-                  <li>• One-on-one mentorship opportunities</li>
-                  <li>• Leadership retreats and conferences</li>
-                  <li>• Practical ministry experience</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Join Ministry CTA */}
-      <section className="py-16 bg-blue-600 text-white">
+      {/* Call to Action */}
+      <section className="py-16 bg-purple-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Ready to Serve?</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Ready to Get Involved?</h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            God has given you unique gifts and talents. Join one of our ministries and make a difference 
-            in our community while growing in your faith.
+            God has given you unique gifts and talents. Join a ministry where you can use them to serve others and grow in your faith.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold">
-              <Users className="h-5 w-5 mr-2" />
-              Find My Ministry
+            <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100 font-semibold">
+              <Link to="/connect" className="flex items-center">
+                Join a Ministry
+                <ArrowRight className="h-5 w-5 ml-2" />
+              </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 font-semibold">
-              <BookOpen className="h-5 w-5 mr-2" />
-              Leadership Training
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600 font-semibold" asChild>
+              <Link to="/whatsapp-groups">
+                <MessageCircle className="h-5 w-5 mr-2" />
+                Join WhatsApp Groups
+              </Link>
             </Button>
           </div>
         </div>

@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import Ministries from "./pages/Ministries";
 import Resources from "./pages/Resources";
 import Connect from "./pages/Connect";
+import WhatsAppGroups from "./pages/WhatsAppGroups";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/ministries" element={<Ministries />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/connect" element={<Connect />} />
+          <Route path="/whatsapp-groups" element={<WhatsAppGroups />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
