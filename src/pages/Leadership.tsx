@@ -1,9 +1,9 @@
-
 import { Mail, Phone, Linkedin, UserCheck, Users, Heart, BookOpen, Mic, Camera } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import VotingSection from "@/components/VotingSection";
 
 const Leadership = () => {
   const executiveTeam = [
@@ -307,6 +307,9 @@ const Leadership = () => {
           </div>
         </div>
       </section>
+
+      {/* Voting Section */}
+      <VotingSection />
 
       {/* Join Leadership */}
       <section className="py-16 bg-blue-600 text-white">

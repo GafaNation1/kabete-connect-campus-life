@@ -17,6 +17,7 @@ const Navigation = () => {
     { name: "Gallery", path: "/gallery", icon: Camera },
     { name: "Ministries", path: "/ministries", icon: Cross },
     { name: "Resources", path: "/resources", icon: Book },
+    { name: "WhatsApp Groups", path: "/whatsapp-groups", icon: Compass },
     { name: "Connect", path: "/connect", icon: Compass },
     { name: "Contact", path: "/contact", icon: Mail },
   ];
