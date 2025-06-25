@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { BookOpen, Download, Play, FileText, Music, Camera, Share2, ExternalLink, Search, Filter } from "lucide-react";
+import { BookOpen, Download, Play, FileText, Music, Camera, Share2, ExternalLink, Search, Filter, Mail } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
